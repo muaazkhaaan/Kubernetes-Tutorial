@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment # Deployment manages replicas of Pods
+metadata:
+  name: my-app # Use this name in commands (e.g., kubectl get deployment my-app)
+spec:
+  replicas: 3 # Keep 3 pods running at all times
+  selector:
+    matchLabels:
+      app: my-app # Selects which Pods are managed by this Deployment. It matches any Pod with the label app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app # Blueprint for Pods that the Deployment should create, the Pod will be labeled app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80 # The Pod will contain 1 container: Named my-app-container, Runs the official nginx image, Listens on port 80
