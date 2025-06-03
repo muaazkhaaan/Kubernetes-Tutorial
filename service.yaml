@@ -1,0 +1,14 @@
+apiVersion: v1                # API version used for Service objects
+kind: Service                 # Declares this YAML defines a Service
+
+metadata:
+  name: my-app         # Name of the Service (used for DNS and discovery)
+
+spec:
+  selector:
+    app: my-app                # Matches Pods with the label 'app=my-app'; directs traffic to those Pods
+  ports:
+    - protocol: TCP           # Protocol to use (typically TCP for web apps)
+      port: 80                # Port the Service will expose (stable internal cluster port)
+      targetPort: 80          # Port on the container that traffic will be forwarded to
+  type: NodePort              # Makes the Service accessible externally on a static port range (30000–32767) on each Node
